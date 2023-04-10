@@ -45,7 +45,7 @@ To use this package, add map_calculation as a dependency in your '**pubspec.yaml
         map_calculation: ^1.0.0
 ```
 
-Then, run flutter pub get to install the package.
+Then, run '**flutter pub get**' to install the package.
 
 ## Usage
 
@@ -57,33 +57,33 @@ import 'package:map_calculation/map_calculation.dart';
 
 ### Calculating Distance Between Two Points
 
-You can use the distanceBetween function to calculate the distance between two points on a map. The function takes four arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point. The function returns the distance in meters.
+You can use the '**distanceBetween**' function to calculate the distance between two points on a map. The function takes four arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point. The function returns the distance in meters.
 
 ```dart
 double distance = MapCalculation.distanceBetween(
-37.4219999,
--122.0840575,
-37.4220011,
--122.0866519,
+    37.4219999,
+    -122.0840575,
+    37.4220011,
+    -122.0866519,
 );
 ```
 
 ### Calculating Bearing Between Two Points
 
-You can use the bearingBetween function to calculate the bearing between two points on a map. The function takes four arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point. The function returns the bearing in degrees.
+You can use the '**bearingBetween**' function to calculate the bearing between two points on a map. The function takes four arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point. The function returns the bearing in degrees.
 
 ```dart
 double bearing = MapCalculation.bearingBetween(
-37.4219999,
--122.0840575,
-37.4220011,
--122.0866519,
+    37.4219999,
+    -122.0840575,
+    37.4220011,
+    -122.0866519,
 );
 ```
 
 ### Calculating Destination Point
 
-You can use the destinationPoint function to calculate the destination point from a starting point, given a distance and a bearing. The function takes three arguments: the latitude and longitude of the starting point, the distance in meters, and the bearing in degrees. The function returns a LatLng object representing the destination point.
+You can use the '**destinationPoint**' function to calculate the destination point from a starting point, given a distance and a bearing. The function takes three arguments: the latitude and longitude of the starting point, the distance in meters, and the bearing in degrees. The function returns a LatLng object representing the destination point.
 
 ```dart
 LatLng startingPoint = LatLng(37.4219999, -122.0840575);
@@ -94,7 +94,7 @@ LatLng destinationPoint = MapCalculation.destinationPoint(startingPoint, distanc
 
 ### Calculating Midpoint Between Two Points
 
-You can use the midpointBetween function to calculate the midpoint between two points on a map. The function takes four arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point. The function returns a LatLng object representing the midpoint.
+You can use the '**midpointBetween**' function to calculate the midpoint between two points on a map. The function takes four arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point. The function returns a LatLng object representing the midpoint.
 
 ```dart
 LatLng point1 = LatLng(37.4219999, -122.0840575);
@@ -104,8 +104,8 @@ LatLng midpoint = MapCalculation.midpointBetween(point1, point2);
 
 ## Contributing
 
-We welcome contributions to this package. If you have an idea for a new feature or improvement, please open an issue on our GitHub repository. If you would like to contribute code, please fork the repository and submit a pull request. All contributions must adhere to our code of conduct.
+We welcome contributions to this package. If you have an idea for a new feature or improvement, please open an issue on our <a href="https://github.com/Ujjwalsharma2210/flutter_geo_math" target="_blank">GitHub repository</a>. If you would like to contribute code, please fork the repository and submit a pull request. All contributions must adhere to our code of conduct.
 
 ## License
 
-This package is released under the MIT License. See the LICENSE file for details.
+This package is released under the <a href="https://opensource.org/license/mit/" target="_blank">MIT license</a>. See the <a href="https://github.com/Ujjwalsharma2210/flutter_geo_math/blob/main/LICENSE" target="_blank">LICENSE</a> file for details.
