@@ -42,21 +42,21 @@ from the package authors, and more.
 
 This package provides a set of utility classes and functions for performing map-related calculations in a Flutter application.
 
-Installation
-To use this package, add map_calculation as a dependency in your pubspec.yaml file:
+## Installation
 
-yaml
-Copy code
+To use this package, add map_calculation as a dependency in your '**pubspec.yaml**' file:
+'''
 dependencies:
 map_calculation: ^1.0.0
+'''
 Then, run flutter pub get to install the package.
 
-Usage
-Import the map_calculation package in your Dart code:
+## Usage
 
-dart
-Copy code
+Import the map_calculation package in your Dart code:
+'''dart
 import 'package:map_calculation/map_calculation.dart';
+'''
 Calculating Distance Between Two Points
 You can use the distanceBetween function to calculate the distance between two points on a map. The function takes four arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point. The function returns the distance in meters.
 
