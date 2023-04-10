@@ -23,7 +23,7 @@ import 'package:map_calculation/map_calculation.dart';
 
 ### Calculating Distance Between Two Points
 
-You can use the '**distanceBetween**' function to calculate the distance between two points on a map. The function takes four arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point. The function returns the distance in meters.
+You can use the '**distanceBetween**' function to calculate the distance between two points on a map. The function takes five arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point and the units you want the distance in.
 
 ```dart
 double distance = MapCalculation.distanceBetween(
@@ -31,8 +31,11 @@ double distance = MapCalculation.distanceBetween(
     -122.0840575,
     37.4220011,
     -122.0866519,
+    "meters"
 );
 ```
+
+Available return units are : meters, kilometers, yards and miles. Replace the **meters** from above example to your required units.
 
 ### Calculating Bearing Between Two Points
 
