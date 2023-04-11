@@ -2,6 +2,8 @@ library flutter_geo_math;
 
 import 'dart:math';
 
+import 'lat_lng.dart';
+
 /// A Calculator.
 class FlutterGeoMath {
   double toRequestedUnit(String unit, double distanceInKm) {
@@ -46,7 +48,60 @@ class FlutterGeoMath {
     // return distance; // in km
   }
 
+  double bearingBetween(double lat1, double lon1, double lat2, double lon2) {
+    var dLon = degreesToRadians(lon2 - lon1);
+    var y = sin(dLon) * cos(degreesToRadians(lat2));
+    var x = cos(degreesToRadians(lat1)) * sin(degreesToRadians(lat2)) -
+        sin(degreesToRadians(lat1)) * cos(degreesToRadians(lat2)) * cos(dLon);
+    var angle = degreesToRadians(atan2(y, x));
+    return (angle + 360) % 360;
+  }
+
+  LatLng calculateDestinationPoint(
+      double lat, double lng, double distance, double bearing) {
+    double radius = 6371 * 1000; // Earth's radius in meters
+    double distRatio = distance / radius;
+    double bearingRadians = degreesToRadians(bearing);
+    double startLatRadians = degreesToRadians(lat);
+    double startLngRadians = degreesToRadians(lng);
+
+    double endLatRadians = asin(sin(startLatRadians) * cos(distRatio) +
+        cos(startLatRadians) * sin(distRatio) * cos(bearingRadians));
+
+    double endLngRadians = startLngRadians +
+        atan2(sin(bearingRadians) * sin(distRatio) * cos(startLatRadians),
+            cos(distRatio) - sin(startLatRadians) * sin(endLatRadians));
+
+    double endLat = radiansToDegrees(endLatRadians);
+    double endLng = radiansToDegrees(endLngRadians);
+
+    return LatLng(endLat, endLng);
+  }
+
+  LatLng calculateMidpoint(double lat1, double lng1, double lat2, double lng2) {
+    double dLat = degreesToRadians(lat2 - lat1);
+    double dLng = degreesToRadians(lng2 - lng1);
+    double lat1Radians = degreesToRadians(lat1);
+    double lat2Radians = degreesToRadians(lat2);
+
+    double bX = cos(lat2Radians) * cos(dLng);
+    double bY = cos(lat2Radians) * sin(dLng);
+    double midLatRadians = atan2(sin(lat1Radians) + sin(lat2Radians),
+        sqrt((cos(lat1Radians) + bX) * (cos(lat1Radians) + bX) + bY * bY));
+    double midLngRadians =
+        degreesToRadians(lng1) + atan2(bY, cos(lat1Radians) + bX);
+
+    double midLat = radiansToDegrees(midLatRadians);
+    double midLng = radiansToDegrees(midLngRadians);
+
+    return LatLng(midLat, midLng);
+  }
+
   double degreesToRadians(double degrees) {
     return degrees * pi / 180;
+  }
+
+  double radiansToDegrees(double radians) {
+    return radians * 180 / pi;
   }
 }
