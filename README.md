@@ -71,6 +71,16 @@ LatLng point2 = LatLng(37.4220011, -122.0866519);
 LatLng midpoint = MapCalculation.midpointBetween(point1, point2);
 ```
 
+## TODOS
+
+- Intersection calculation: Applications may need to calculate the intersection of two lines or the intersection of a line and a shape, such as a polygon or circle.<br>
+
+- Geocoding: Applications may need to convert an address or place name into a latitude and longitude, or vice versa. This can be useful for finding the location of a place or for searching for nearby points of interest.<br>
+
+- Routing: Applications may need to calculate the best route between two points on a map, taking into account factors such as traffic, road closures, and turn restrictions.<br>
+
+- Area calculation: Applications may need to calculate the area of a shape, such as a polygon or circle. This can be useful for measuring the size of a parcel of land or for calculating the coverage area of a wireless network.<br>
+
 ## Contributing
 
 We welcome contributions to this package. If you have an idea for a new feature or improvement, please open an issue on our <a href="https://github.com/Ujjwalsharma2210/flutter_geo_math" target="_blank">GitHub repository</a>. If you would like to contribute code, please fork the repository and submit a pull request. All contributions must adhere to our [code of conduct](https://github.com/Ujjwalsharma2210/flutter_geo_math/blob/main/CODE_OF_CONDUCT.md).
