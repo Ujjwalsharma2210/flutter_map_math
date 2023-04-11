@@ -73,7 +73,7 @@ LatLng midpoint = MapCalculation.midpointBetween(point1, point2);
 
 ## Contributing
 
-We welcome contributions to this package. If you have an idea for a new feature or improvement, please open an issue on our <a href="https://github.com/Ujjwalsharma2210/flutter_geo_math" target="_blank">GitHub repository</a>. If you would like to contribute code, please fork the repository and submit a pull request. All contributions must adhere to our code of conduct.
+We welcome contributions to this package. If you have an idea for a new feature or improvement, please open an issue on our <a href="https://github.com/Ujjwalsharma2210/flutter_geo_math" target="_blank">GitHub repository</a>. If you would like to contribute code, please fork the repository and submit a pull request. All contributions must adhere to our [code of conduct](https://github.com/Ujjwalsharma2210/flutter_geo_math/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
