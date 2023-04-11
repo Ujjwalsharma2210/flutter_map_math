@@ -49,3 +49,7 @@ LatLng point1 = LatLng(37.4219999, -122.0840575);
 LatLng point2 = LatLng(37.4220011, -122.0866519);
 LatLng midpoint = MapCalculation.midpointBetween(point1, point2);
 ```
+
+## 0.0.2
+
+updated docs
