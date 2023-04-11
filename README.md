@@ -2,6 +2,8 @@
 
 This package provides a set of utility classes and functions for performing map-related calculations in a Flutter application.
 
+
+<!--
 ## Installation
 
 To use this package, add map_calculation as a dependency in your '**pubspec.yaml**' file:
@@ -20,6 +22,8 @@ Import the map_calculation package in your Dart code:
 ```dart
 import 'package:map_calculation/map_calculation.dart';
 ```
+-->
+
 
 ### Calculating Distance Between Two Points
 
