@@ -18,7 +18,7 @@ Then, run '**flutter pub get**' to install the package.
 Import the map_calculation package in your Dart code:
 
 ```dart
-import 'package:map_calculation/map_calculation.dart';
+import 'package:map_calculation/flutter_geo_math.dart';
 ```
 
 ### Calculating Distance Between Two Points
@@ -26,7 +26,7 @@ import 'package:map_calculation/map_calculation.dart';
 You can use the '**distanceBetween**' function to calculate the distance between two points on a map. The function takes five arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point and the units you want the distance in.
 
 ```dart
-double distance = MapCalculation.distanceBetween(
+double distance = FlutterGeoMath.distanceBetween(
     37.4219999,
     -122.0840575,
     37.4220011,
@@ -42,7 +42,7 @@ Available return units are : meters, kilometers, yards and miles. Replace the **
 You can use the '**bearingBetween**' function to calculate the bearing between two points on a map. The function takes four arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point. The function returns the bearing in degrees.
 
 ```dart
-double bearing = MapCalculation.bearingBetween(
+double bearing = FlutterGeoMath.bearingBetween(
     37.4219999,
     -122.0840575,
     37.4220011,
@@ -58,7 +58,7 @@ You can use the '**destinationPoint**' function to calculate the destination poi
 LatLng startingPoint = LatLng(37.4219999, -122.0840575);
 double distance = 1000;
 double bearing = 90;
-LatLng destinationPoint = MapCalculation.destinationPoint(startingPoint, distance, bearing);
+LatLng destinationPoint = FlutterGeoMath.destinationPoint(startingPoint, distance, bearing);
 ```
 
 ### Calculating Midpoint Between Two Points
@@ -68,7 +68,7 @@ You can use the '**midpointBetween**' function to calculate the midpoint between
 ```dart
 LatLng point1 = LatLng(37.4219999, -122.0840575);
 LatLng point2 = LatLng(37.4220011, -122.0866519);
-LatLng midpoint = MapCalculation.midpointBetween(point1, point2);
+LatLng midpoint = FlutterGeoMath.midpointBetween(point1, point2);
 ```
 
 ## TODOS

@@ -57,7 +57,7 @@ class FlutterGeoMath {
     return (angle + 360) % 360;
   }
 
-  LatLng calculateDestinationPoint(
+  LatLng destinationPoint(
       double lat, double lng, double distance, double bearing) {
     double radius = 6371 * 1000; // Earth's radius in meters
     double distRatio = distance / radius;
@@ -78,7 +78,7 @@ class FlutterGeoMath {
     return LatLng(endLat, endLng);
   }
 
-  LatLng calculateMidpoint(double lat1, double lng1, double lat2, double lng2) {
+  LatLng midpointBetween(double lat1, double lng1, double lat2, double lng2) {
     double dLat = degreesToRadians(lat2 - lat1);
     double dLng = degreesToRadians(lng2 - lng1);
     double lat1Radians = degreesToRadians(lat1);
