@@ -7,5 +7,9 @@ void main() {
     final calculator = FlutterGeoMath();
     print(calculator.distanceBetween(
         37.4219999, -122.0840575, 37.4220011, -122.0866519, "meters"));
+    print(calculator.bearingBetween(
+        37.4219999, -122.0840575, 37.4220011, -122.0866519));
+    print(calculator.calculateMidpoint(
+        37.4219999, -122.0840575, 37.4220011, -122.0866519));
   });
 }
