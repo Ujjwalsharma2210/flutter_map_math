@@ -81,6 +81,20 @@ LatLng midpoint = MapCalculation.midpointBetween(point1, point2);
 
 - Area calculation: Applications may need to calculate the area of a shape, such as a polygon or circle. This can be useful for measuring the size of a parcel of land or for calculating the coverage area of a wireless network.<br>
 
+- Elevation calculation: Applications may need to calculate the elevation of a point on a map, either as an absolute height above sea level or as a relative height above nearby terrain.<br>
+
+- Heatmap generation: Applications may need to generate a heatmap of points or events on a map, which can be useful for visualizing patterns or clusters of activity.<br>
+
+- Clustering: Applications may need to group nearby points on a map into clusters, which can be useful for reducing visual clutter or for identifying areas of high activity.<br>
+
+- Proximity detection: Applications may need to detect when a user or object is within a certain distance of a point or area on a map, which can be useful for triggering location-based actions or notifications.<br>
+
+- Geofencing: Applications may need to create a virtual boundary around a point or area on a map, and detect when a user or object enters or leaves that boundary. This can be useful for triggering location-based actions or notifications.<br>
+
+- Tile generation: Applications may need to generate map tiles for use in custom map layers or overlays, which can be useful for adding custom data or visualizations to a map.<br>
+
+- Point-of-interest identification: Applications may need to identify nearby points of interest, such as restaurants, gas stations, or landmarks. This can be useful for providing recommendations or directions to users.<br>
+
 ## Contributing
 
 We welcome contributions to this package. If you have an idea for a new feature or improvement, please open an issue on our <a href="https://github.com/Ujjwalsharma2210/flutter_geo_math" target="_blank">GitHub repository</a>. If you would like to contribute code, please fork the repository and submit a pull request. All contributions must adhere to our [code of conduct](https://github.com/Ujjwalsharma2210/flutter_geo_math/blob/main/CODE_OF_CONDUCT.md).
