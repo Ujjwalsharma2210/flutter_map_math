@@ -79,7 +79,7 @@ class FlutterGeoMath {
   }
 
   LatLng midpointBetween(double lat1, double lng1, double lat2, double lng2) {
-    double dLat = degreesToRadians(lat2 - lat1);
+    // double dLat = degreesToRadians(lat2 - lat1);
     double dLng = degreesToRadians(lng2 - lng1);
     double lat1Radians = degreesToRadians(lat1);
     double lat2Radians = degreesToRadians(lat2);

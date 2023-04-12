@@ -52,6 +52,16 @@ LatLng midpoint = MapCalculation.midpointBetween(point1, point2);
 
 ## 0.0.2
 
+updated docs
+
 ## 0.0.3
 
 updated docs
+
+## 0.0.4
+
+fixes
+
+## 0.0.5
+
+fixes
