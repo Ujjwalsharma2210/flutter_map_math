@@ -18,7 +18,7 @@ Then, run '**flutter pub get**' to install the package.
 Import the map_calculation package in your Dart code:
 
 ```dart
-import 'package:map_calculation/flutter_geo_math.dart';
+import 'package:flutter_geo_math/flutter_geo_math.dart';
 ```
 
 ### Calculating Distance Between Two Points
