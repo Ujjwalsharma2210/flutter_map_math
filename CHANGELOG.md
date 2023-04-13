@@ -65,3 +65,7 @@ fixes
 ## 0.0.5
 
 fixes
+
+## 0.0.6
+
+added comments for better readability.

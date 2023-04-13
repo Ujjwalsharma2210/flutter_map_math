@@ -1,11 +1,11 @@
 library flutter_geo_math;
 
 import 'dart:math';
-
 import 'lat_lng.dart';
 
-/// A Calculator.
+// Map related calculations class
 class FlutterGeoMath {
+  // converts kilometers to desired(meters, miles, yards) units
   double toRequestedUnit(String unit, double distanceInKm) {
     switch (unit) {
       case 'kilometers':
@@ -22,6 +22,7 @@ class FlutterGeoMath {
     return distanceInKm;
   }
 
+  // Returns distance between two locations on earth
   double distanceBetween(
       double lat1, double lon1, double lat2, double lon2, String unit) {
     const earthRadius = 6371; // in km
@@ -48,6 +49,10 @@ class FlutterGeoMath {
     // return distance; // in km
   }
 
+  // Returns bearing angle in degrees.
+  // Bearing angle => A bearing describes a line as heading north or south, and
+  //deflected some number of degrees toward the east or west. A bearing,
+  //therefore, will always have an angle less than 90°.
   double bearingBetween(double lat1, double lon1, double lat2, double lon2) {
     var dLon = degreesToRadians(lon2 - lon1);
     var y = sin(dLon) * cos(degreesToRadians(lat2));
@@ -57,6 +62,8 @@ class FlutterGeoMath {
     return (angle + 360) % 360;
   }
 
+  // Uses a point, distance and bearing anlge to find the destination point.
+  // Returns LatLng Object
   LatLng destinationPoint(
       double lat, double lng, double distance, double bearing) {
     double radius = 6371 * 1000; // Earth's radius in meters
@@ -78,6 +85,8 @@ class FlutterGeoMath {
     return LatLng(endLat, endLng);
   }
 
+  // Returns the mid point of two locations on earth.
+  // Returns a LatLng object(the coordinates of mid point)
   LatLng midpointBetween(double lat1, double lng1, double lat2, double lng2) {
     // double dLat = degreesToRadians(lat2 - lat1);
     double dLng = degreesToRadians(lng2 - lng1);
@@ -97,10 +106,12 @@ class FlutterGeoMath {
     return LatLng(midLat, midLng);
   }
 
+  // Convert degrees to radians
   double degreesToRadians(double degrees) {
     return degrees * pi / 180;
   }
 
+  // converts radians to degrees
   double radiansToDegrees(double radians) {
     return radians * 180 / pi;
   }
