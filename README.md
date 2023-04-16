@@ -39,7 +39,8 @@ Available return units are : meters, kilometers, yards and miles. Replace the **
 
 ### Calculating Bearing Between Two Points
 
-You can use the '**bearingBetween**' function to calculate the bearing between two points on a map. The function takes four arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point. The function returns the bearing in degrees.
+You can use the '**bearingBetween**' function to calculate the bearing between two points on a map. The function takes four arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point.
+The function returns the bearing in degrees.
 
 ```dart
 double bearing = FlutterGeoMath.bearingBetween(
@@ -52,7 +53,8 @@ double bearing = FlutterGeoMath.bearingBetween(
 
 ### Calculating Destination Point
 
-You can use the '**destinationPoint**' function to calculate the destination point from a starting point, given a distance and a bearing. The function takes three arguments: the latitude and longitude of the starting point, the distance in meters, and the bearing in degrees. The function returns a LatLng object representing the destination point.
+You can use the '**destinationPoint**' function to calculate the destination point from a starting point, given a distance and a bearing. The function takes three arguments: the latitude and longitude of the starting point, the distance in meters, and the bearing in degrees.
+The function returns a LatLng object representing the destination point.
 
 ```dart
 LatLng startingPoint = LatLng(37.4219999, -122.0840575);
@@ -63,12 +65,30 @@ LatLng destinationPoint = FlutterGeoMath.destinationPoint(startingPoint, distanc
 
 ### Calculating Midpoint Between Two Points
 
-You can use the '**midpointBetween**' function to calculate the midpoint between two points on a map. The function takes four arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point. The function returns a LatLng object representing the midpoint.
+You can use the '**midpointBetween**' function to calculate the midpoint between two points on a map. The function takes four arguments: the latitude and longitude of the first point, and the latitude and longitude of the second point.
+The function returns a LatLng object representing the midpoint.
 
 ```dart
 LatLng point1 = LatLng(37.4219999, -122.0840575);
 LatLng point2 = LatLng(37.4220011, -122.0866519);
 LatLng midpoint = FlutterGeoMath.midpointBetween(point1, point2);
+```
+
+### Calculating intersection point of two lines
+
+You can use the '**calculateIntersection**' function to calculate the intersection of two lines on the map. The function takes six arguments: the latitude, longitude and bearing angle to first line, and the latitude, longitude and bearing angle of second line.
+The function returns a LatLng object representing the intersection.
+
+```dart
+double lat1 = 40.7128; // New York City
+double lon1 = -74.0060;
+double bearing1 = 45.0; // Degrees
+
+double lat2 = 51.5074; // London
+double lon2 = -0.1278;
+double bearing2 = 180.0; // Degrees
+
+LatLng intersection = calculateIntersection(lat1, lon1, bearing1, lat2, lon2, bearing2);
 ```
 
 ## TODOS

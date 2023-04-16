@@ -81,3 +81,7 @@ fixes
 ## 0.0.9
 
 fixes
+
+## 0.1.0
+
+added 'calculateIntersection' function to find the intersection point of two lines.

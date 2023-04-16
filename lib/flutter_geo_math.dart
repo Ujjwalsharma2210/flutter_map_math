@@ -106,6 +106,47 @@ class FlutterGeoMath {
     return LatLng(midLat, midLng);
   }
 
+// A function to calculate the intersection of two lines on Earth
+// Returns a LatLng object with the latitude and longitude of the intersection point
+  LatLng calculateIntersection(double lat1, double lon1, double bearing1,
+      double lat2, double lon2, double bearing2) {
+    // Convert degrees to radians
+    double lat1Rad = degreesToRadians(lat1);
+    double lon1Rad = degreesToRadians(lon1);
+    double bearing1Rad = degreesToRadians(bearing1);
+    double lat2Rad = degreesToRadians(lat2);
+    double lon2Rad = degreesToRadians(lon2);
+    double bearing2Rad = degreesToRadians(bearing2);
+
+    // Calculate the intersection point
+    double dLat = lat2Rad - lat1Rad;
+    double dLon = lon2Rad - lon1Rad;
+
+    double dist12 = 2 *
+        asin(sqrt(pow(sin(dLat / 2), 2) +
+            cos(lat1Rad) * cos(lat2Rad) * pow(sin(dLon / 2), 2)));
+    if (dist12 == 0) {
+      throw Exception("Lines are parallel, intersection is undefined.");
+    }
+
+    double bearingA = acos((sin(lat2Rad) - sin(lat1Rad) * cos(dist12)) /
+        (sin(dist12) * cos(lat1Rad)));
+    double bearingB = acos((sin(lat1Rad) - sin(lat2Rad) * cos(dist12)) /
+        (sin(dist12) * cos(lat2Rad)));
+
+    double intersectionLat = asin(sin(lat1Rad) * cos(bearingA) +
+        cos(lat1Rad) * sin(bearingA) * cos(bearing1Rad));
+    double intersectionLon = lon1Rad +
+        atan2(sin(bearing1Rad) * sin(bearingA) * cos(lat1Rad),
+            cos(bearingA) - sin(lat1Rad) * sin(intersectionLat));
+
+    // Convert back to degrees
+    double intersectionLatDeg = radiansToDegrees(intersectionLat);
+    double intersectionLonDeg = radiansToDegrees(intersectionLon);
+
+    return LatLng(intersectionLatDeg, intersectionLonDeg);
+  }
+
   /// Convert degrees to radians
   double degreesToRadians(double degrees) {
     return degrees * pi / 180;
