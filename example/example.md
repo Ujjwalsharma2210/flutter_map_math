@@ -1,5 +1,5 @@
 ```dart
-double distance = FlutterGeoMath.distanceBetween(
+double distance = FlutterMapMath.distanceBetween(
     37.4219999,
     -122.0840575,
     37.4220011,
@@ -7,7 +7,7 @@ double distance = FlutterGeoMath.distanceBetween(
     "meters"
 );
 
-double bearing = FlutterGeoMath.bearingBetween(
+double bearing = FlutterMapMath.bearingBetween(
     37.4219999,
     -122.0840575,
     37.4220011,
@@ -17,11 +17,11 @@ double bearing = FlutterGeoMath.bearingBetween(
 LatLng startingPoint = LatLng(37.4219999, -122.0840575);
 double distance = 1000;
 double bearing = 90;
-LatLng destinationPoint = FlutterGeoMath.destinationPoint(startingPoint, distance, bearing);
+LatLng destinationPoint = FlutterMapMath.destinationPoint(startingPoint, distance, bearing);
 
 LatLng point1 = LatLng(37.4219999, -122.0840575);
 LatLng point2 = LatLng(37.4220011, -122.0866519);
-LatLng midpoint = FlutterGeoMath.midpointBetween(point1, point2);
+LatLng midpoint = FlutterMapMath.midpointBetween(point1, point2);
 ```
 
 ```dart

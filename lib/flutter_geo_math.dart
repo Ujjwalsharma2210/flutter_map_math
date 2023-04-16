@@ -1,10 +1,10 @@
-library flutter_geo_math;
+library flutter_map_math;
 
 import 'dart:math';
 import 'lat_lng.dart';
 
 /// Map related calculations class
-class FlutterGeoMath {
+class FlutterMapMath {
   /// converts kilometers to desired(meters, miles, yards) units
   double toRequestedUnit(String unit, double distanceInKm) {
     switch (unit) {
