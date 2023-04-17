@@ -106,8 +106,8 @@ class FlutterMapMath {
     return LatLng(midLat, midLng);
   }
 
-// A function to calculate the intersection of two lines on Earth
-// Returns a LatLng object with the latitude and longitude of the intersection point
+  /// A function to calculate the intersection of two lines on Earth
+  /// Returns a LatLng object with the latitude and longitude of the intersection point
   LatLng calculateIntersection(double lat1, double lon1, double bearing1,
       double lat2, double lon2, double bearing2) {
     // Convert degrees to radians
@@ -145,6 +145,24 @@ class FlutterMapMath {
     double intersectionLonDeg = radiansToDegrees(intersectionLon);
 
     return LatLng(intersectionLatDeg, intersectionLonDeg);
+  }
+
+  /// function for proximity detection that takes in the user's current location
+  /// and a list of points representing areas on the map, and returns a list of
+  /// points that are within a certain distance of the user's location
+  List<LatLng> detectProximity(
+      LatLng userLocation, List<LatLng> mapPoints, double distanceThreshold) {
+    List<LatLng> nearbyPoints = [];
+
+    for (LatLng point in mapPoints) {
+      double distance = sqrt(pow(userLocation.latitude - point.latitude, 2) +
+          pow(userLocation.longitude - point.longitude, 2));
+      if (distance <= distanceThreshold) {
+        nearbyPoints.add(point);
+      }
+    }
+
+    return nearbyPoints;
   }
 
   /// Convert degrees to radians

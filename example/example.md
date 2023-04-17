@@ -35,3 +35,19 @@ LatLng midpoint = FlutterMapMath.midpointBetween(point1, point2);
 
   LatLng intersection = calculateIntersection(lat1, lon1, bearing1, lat2, lon2, bearing2);
 ```
+
+```dart
+LatLng userLocation = LatLng(3.0, 5.0);
+  List<LatLng> mapPoints = [
+    LatLng(1.0, 1.0),
+    LatLng(2.0, 2.0),
+    LatLng(4.0, 4.0),
+    LatLng(6.0, 6.0),
+    LatLng(8.0, 8.0),
+  ];
+
+  double distanceThreshold = 3.0;
+
+  List<LatLng> nearbyPoints = FlutterMapMath.detectProximity(userLocation, mapPoints, distanceThreshold);
+
+```

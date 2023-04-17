@@ -88,12 +88,34 @@ double lat2 = 51.5074; // London
 double lon2 = -0.1278;
 double bearing2 = 180.0; // Degrees
 
-LatLng intersection = calculateIntersection(lat1, lon1, bearing1, lat2, lon2, bearing2);
+LatLng intersection = FlutterMapMath.calculateIntersection(lat1, lon1, bearing1, lat2, lon2, bearing2);
+```
+
+### Detecting proximity of points from one point
+
+You can use the '**detectProximity**' function to check if any location in a list of locations has entered the proximity of a certain location. The function takes
+three arguments: a LatLng object for the coordiantes of main location, List of LatLng objects and a double distance threashold.
+The function returns a list of LatLng objects from the list which are in the proximity of the main location.
+
+```dart
+LatLng userLocation = LatLng(3.0, 5.0);
+  List<LatLng> mapPoints = [
+    LatLng(1.0, 1.0),
+    LatLng(2.0, 2.0),
+    LatLng(4.0, 4.0),
+    LatLng(6.0, 6.0),
+    LatLng(8.0, 8.0),
+  ];
+
+  double distanceThreshold = 3.0;
+
+  List<LatLng> nearbyPoints = FlutterMapMath.detectProximity(userLocation, mapPoints, distanceThreshold);
+
 ```
 
 ## TODOS
 
-- Intersection calculation: Applications may need to calculate the intersection of two lines or the intersection of a line and a shape, such as a polygon or circle.<br>
+- Intersection calculation: Applications may need to calculate the intersection of two lines or the intersection of a line and a shape, such as a polygon or circle. DONE<br>
 
 - Mapcoding: Applications may need to convert an address or place name into a latitude and longitude, or vice versa. This can be useful for finding the location of a place or for searching for nearby points of interest.<br>
 
@@ -107,7 +129,7 @@ LatLng intersection = calculateIntersection(lat1, lon1, bearing1, lat2, lon2, be
 
 - Clustering: Applications may need to group nearby points on a map into clusters, which can be useful for reducing visual clutter or for identifying areas of high activity.<br>
 
-- Proximity detection: Applications may need to detect when a user or object is within a certain distance of a point or area on a map, which can be useful for triggering location-based actions or notifications.<br>
+- Proximity detection: Applications may need to detect when a user or object is within a certain distance of a point or area on a map, which can be useful for triggering location-based actions or notifications. DONE<br>
 
 - Mapfencing: Applications may need to create a virtual boundary around a point or area on a map, and detect when a user or object enters or leaves that boundary. This can be useful for triggering location-based actions or notifications.<br>
 

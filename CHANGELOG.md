@@ -85,3 +85,27 @@ fixes
 ## 0.1.0
 
 added 'calculateIntersection' function to find the intersection point of two lines.
+
+## 0.1.1
+
+### Detecting proximity of points from one point
+
+You can use the '**detectProximity**' function to check if any location in a list of locations has entered the proximity of a certain location. The function takes
+three arguments: a LatLng object for the coordiantes of main location, List of LatLng objects and a double distance threashold.
+The function returns a list of LatLng objects from the list which are in the proximity of the main location.
+
+```dart
+LatLng userLocation = LatLng(3.0, 5.0);
+  List<LatLng> mapPoints = [
+    LatLng(1.0, 1.0),
+    LatLng(2.0, 2.0),
+    LatLng(4.0, 4.0),
+    LatLng(6.0, 6.0),
+    LatLng(8.0, 8.0),
+  ];
+
+  double distanceThreshold = 3.0;
+
+  List<LatLng> nearbyPoints = FlutterMapMath.detectProximity(userLocation, mapPoints, distanceThreshold);
+
+```
