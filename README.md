@@ -113,9 +113,22 @@ LatLng userLocation = LatLng(3.0, 5.0);
 
 ```
 
-## TODOS
+### Creating virtual boundary around a point
 
-- Intersection calculation: Applications may need to calculate the intersection of two lines or the intersection of a line and a shape, such as a polygon or circle. DONE<br>
+the '**createBoundary**' function takes a '**LatLng**' object representing the center of the boundary and a '**double**' representing the radius of the
+boundary in meters. It returns a function that takes a '**LatLng**' object representing a location and returns a boolean indicating whether
+the location is within the boundary.<br>
+You can use the '**createBoundary**' function to create multiple boundaries and then use the returned functions to check whether a user or object is within each boundary.
+
+```dart
+LatLng center = LatLng(37.4219983, -122.084);
+double radiusInMeters = 100.0;
+Function isInBoundary = createBoundary(center, radiusInMeters);
+LatLng userLocation = LatLng(37.422, -122.083);
+bool isWithinBoundary = isInBoundary(userLocation);
+```
+
+## TODOS
 
 - Mapcoding: Applications may need to convert an address or place name into a latitude and longitude, or vice versa. This can be useful for finding the location of a place or for searching for nearby points of interest.<br>
 
@@ -128,10 +141,6 @@ LatLng userLocation = LatLng(3.0, 5.0);
 - Heatmap generation: Applications may need to generate a heatmap of points or events on a map, which can be useful for visualizing patterns or clusters of activity.<br>
 
 - Clustering: Applications may need to group nearby points on a map into clusters, which can be useful for reducing visual clutter or for identifying areas of high activity.<br>
-
-- Proximity detection: Applications may need to detect when a user or object is within a certain distance of a point or area on a map, which can be useful for triggering location-based actions or notifications. DONE<br>
-
-- Mapfencing: Applications may need to create a virtual boundary around a point or area on a map, and detect when a user or object enters or leaves that boundary. This can be useful for triggering location-based actions or notifications.<br>
 
 - Tile generation: Applications may need to generate map tiles for use in custom map layers or overlays, which can be useful for adding custom data or visualizations to a map.<br>
 

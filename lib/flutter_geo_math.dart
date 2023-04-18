@@ -1,6 +1,7 @@
 library flutter_map_math;
 
 import 'dart:math';
+
 import 'lat_lng.dart';
 
 /// Map related calculations class
@@ -163,6 +164,24 @@ class FlutterMapMath {
     }
 
     return nearbyPoints;
+  }
+
+  // function that takes a center location and a radius in meters
+  // and returns a function that takes a location and returns a boolean
+  // indicating whether the location is within the boundary.
+  Function createBoundary(LatLng center, double radius) {
+    checkBoundary(LatLng location) {
+      double distanceInMeters = distanceBetween(
+        center.latitude,
+        center.longitude,
+        location.latitude,
+        location.longitude,
+        'meters',
+      );
+      return distanceInMeters <= radius;
+    }
+
+    return checkBoundary;
   }
 
   /// Convert degrees to radians

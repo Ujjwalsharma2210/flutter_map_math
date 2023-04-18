@@ -51,3 +51,11 @@ LatLng userLocation = LatLng(3.0, 5.0);
   List<LatLng> nearbyPoints = FlutterMapMath.detectProximity(userLocation, mapPoints, distanceThreshold);
 
 ```
+
+```dart
+LatLng center = LatLng(37.4219983, -122.084);
+double radiusInMeters = 100.0;
+Function isInBoundary = createBoundary(center, radiusInMeters);
+LatLng userLocation = LatLng(37.422, -122.083);
+bool isWithinBoundary = isInBoundary(userLocation);
+```
