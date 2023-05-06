@@ -184,6 +184,23 @@ class FlutterMapMath {
     return checkBoundary;
   }
 
+  double calculateArea(List<Map<String, double?>> vertices) {
+    int numPoints = vertices.length;
+    double area = 0;
+
+    if (numPoints > 2) {
+      for (int i = 0; i < numPoints; i++) {
+        Map<String, double?> point1 = vertices[i];
+        Map<String, double?> point2 = vertices[(i + 1) % numPoints];
+        area += (point1['longitude'] ?? 0.0) * (point2['latitude'] ?? 0.0) -
+            (point1['latitude'] ?? 0.0) * (point2['longitude'] ?? 0.0);
+      }
+      area /= 2;
+    }
+
+    return area.abs();
+  }
+
   /// Convert degrees to radians
   double degreesToRadians(double degrees) {
     return degrees * pi / 180;

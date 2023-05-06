@@ -128,6 +128,25 @@ LatLng userLocation = LatLng(37.422, -122.083);
 bool isWithinBoundary = isInBoundary(userLocation);
 ```
 
+### Calculating the area of a shape
+
+In this function, we first get the number of vertices of the shape and initialize the area to zero. We then loop over each pair of consecutive vertices, calculating the cross-product of the two vectors formed by the points. Finally, we divide the result by two to get the area of the shape.
+
+Note that this function assumes that the vertices are ordered in a counterclockwise direction, and that the latitude and longitude values are stored in the '**latitude**' and '**longitude**' keys of each vertex dictionary, respectively. If the vertices are ordered clockwise, the calculated area will be negative, but we can simply take the absolute value to get the correct area.
+
+```dart
+List<Map<String, double>> rectangleVertices = [
+    {'latitude': 37.7749, 'longitude': -122.4194}, // San Francisco, CA
+    {'latitude': 37.7749, 'longitude': -122.4174},
+    {'latitude': 37.7769, 'longitude': -122.4174},
+    {'latitude': 37.7769, 'longitude': -122.4194},
+  ];
+
+  double rectangleArea = calculateArea(rectangleVertices);
+
+  print('The area of the rectangle is $rectangleArea square degrees.');
+```
+
 ## TODOS
 
 - Mapcoding: Applications may need to convert an address or place name into a latitude and longitude, or vice versa. This can be useful for finding the location of a place or for searching for nearby points of interest.<br>

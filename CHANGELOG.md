@@ -93,3 +93,7 @@ Added proximity detection function
 ## 0.1.2
 
 Added function to create virtual boundaries
+
+## 0.1.3
+
+Added function to find area of the shape
