@@ -97,3 +97,7 @@ Added function to create virtual boundaries
 ## 0.1.3
 
 Added function to find area of the shape
+
+## 0.1.4
+
+minor fix

@@ -117,7 +117,7 @@ class FlutterMapMath {
     double bearing1Rad = degreesToRadians(bearing1);
     double lat2Rad = degreesToRadians(lat2);
     double lon2Rad = degreesToRadians(lon2);
-    double bearing2Rad = degreesToRadians(bearing2);
+    // double bearing2Rad = degreesToRadians(bearing2);
 
     // Calculate the intersection point
     double dLat = lat2Rad - lat1Rad;
@@ -132,8 +132,8 @@ class FlutterMapMath {
 
     double bearingA = acos((sin(lat2Rad) - sin(lat1Rad) * cos(dist12)) /
         (sin(dist12) * cos(lat1Rad)));
-    double bearingB = acos((sin(lat1Rad) - sin(lat2Rad) * cos(dist12)) /
-        (sin(dist12) * cos(lat2Rad)));
+    // double bearingB = acos((sin(lat1Rad) - sin(lat2Rad) * cos(dist12)) /
+    // (sin(dist12) * cos(lat2Rad)));
 
     double intersectionLat = asin(sin(lat1Rad) * cos(bearingA) +
         cos(lat1Rad) * sin(bearingA) * cos(bearing1Rad));
