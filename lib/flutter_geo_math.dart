@@ -88,18 +88,19 @@ class FlutterMapMath {
 
   /// Returns the mid point of two locations on earth.
   /// Returns a LatLng object(the coordinates of mid point)
-  LatLng midpointBetween(double lat1, double lng1, double lat2, double lng2) {
+
+  LatLng midpointBetween(LatLng location1, LatLng location2) {
     // double dLat = degreesToRadians(lat2 - lat1);
-    double dLng = degreesToRadians(lng2 - lng1);
-    double lat1Radians = degreesToRadians(lat1);
-    double lat2Radians = degreesToRadians(lat2);
+    double dLng = degreesToRadians(location2.longitude - location1.longitude);
+    double lat1Radians = degreesToRadians(location1.latitude);
+    double lat2Radians = degreesToRadians(location2.latitude);
 
     double bX = cos(lat2Radians) * cos(dLng);
     double bY = cos(lat2Radians) * sin(dLng);
     double midLatRadians = atan2(sin(lat1Radians) + sin(lat2Radians),
         sqrt((cos(lat1Radians) + bX) * (cos(lat1Radians) + bX) + bY * bY));
-    double midLngRadians =
-        degreesToRadians(lng1) + atan2(bY, cos(lat1Radians) + bX);
+    double midLngRadians = degreesToRadians(location1.longitude) +
+        atan2(bY, cos(lat1Radians) + bX);
 
     double midLat = radiansToDegrees(midLatRadians);
     double midLng = radiansToDegrees(midLngRadians);
@@ -109,10 +110,6 @@ class FlutterMapMath {
 
   /// A function to calculate the intersection of two lines on Earth
   /// Returns a LatLng object with the latitude and longitude of the intersection point
-
-  // LatLng calculateIntersection(double lat1, double lon1, double bearing1,
-  //     double lat2, double lon2, double bearing2) {
-
   LatLng calculateIntersection(
       LatLng location1, double bearing1, LatLng location2, double bearing2) {
     // Convert degrees to radians
