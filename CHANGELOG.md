@@ -101,3 +101,7 @@ Added function to find area of the shape
 ## 0.1.4
 
 minor fix
+
+## 0.1.5
+
+Instead of passing latitude and longitude to the **calculateIntersection** function, just pass the two points as **LatLng** objects.

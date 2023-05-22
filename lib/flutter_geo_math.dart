@@ -109,14 +109,18 @@ class FlutterMapMath {
 
   /// A function to calculate the intersection of two lines on Earth
   /// Returns a LatLng object with the latitude and longitude of the intersection point
-  LatLng calculateIntersection(double lat1, double lon1, double bearing1,
-      double lat2, double lon2, double bearing2) {
+
+  // LatLng calculateIntersection(double lat1, double lon1, double bearing1,
+  //     double lat2, double lon2, double bearing2) {
+
+  LatLng calculateIntersection(
+      LatLng location1, double bearing1, LatLng location2, double bearing2) {
     // Convert degrees to radians
-    double lat1Rad = degreesToRadians(lat1);
-    double lon1Rad = degreesToRadians(lon1);
+    double lat1Rad = degreesToRadians(location1.latitude);
+    double lon1Rad = degreesToRadians(location1.longitude);
     double bearing1Rad = degreesToRadians(bearing1);
-    double lat2Rad = degreesToRadians(lat2);
-    double lon2Rad = degreesToRadians(lon2);
+    double lat2Rad = degreesToRadians(location2.latitude);
+    double lon2Rad = degreesToRadians(location2.longitude);
     // double bearing2Rad = degreesToRadians(bearing2);
 
     // Calculate the intersection point
