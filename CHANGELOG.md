@@ -105,3 +105,7 @@ minor fix
 ## 0.1.5
 
 Instead of passing latitude and longitude to the **calculateIntersection** function, just pass the two points as **LatLng** objects.
+
+## 0.1.6
+
+Instead of passing latitude and longitude to the **midpointBetween** function, just pass the two points as **LatLng** objects.

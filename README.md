@@ -69,8 +69,8 @@ You can use the '**midpointBetween**' function to calculate the midpoint between
 The function returns a LatLng object representing the midpoint.
 
 ```dart
-LatLng point1 = LatLng(37.4219999, -122.0840575);
-LatLng point2 = LatLng(37.4220011, -122.0866519);
+LatLng location1 = LatLng(37.4219999, -122.0840575);
+LatLng location2 = LatLng(37.4220011, -122.0866519);
 LatLng midpoint = FlutterMapMath.midpointBetween(point1, point2);
 ```
 
@@ -80,15 +80,13 @@ You can use the '**calculateIntersection**' function to calculate the intersecti
 The function returns a LatLng object representing the intersection.
 
 ```dart
-double lat1 = 40.7128; // New York City
-double lon1 = -74.0060;
+LatLng location1 = LatLng(40.7128, -74.0060); // New York City
 double bearing1 = 45.0; // Degrees
 
-double lat2 = 51.5074; // London
-double lon2 = -0.1278;
+LatLng location2 = LatLng(51.5074, -0.1278); // London
 double bearing2 = 180.0; // Degrees
 
-LatLng intersection = FlutterMapMath.calculateIntersection(lat1, lon1, bearing1, lat2, lon2, bearing2);
+LatLng intersection = FlutterMapMath.calculateIntersection(location1, bearing1, location2, bearing2);
 ```
 
 ### Detecting proximity of points from one point
