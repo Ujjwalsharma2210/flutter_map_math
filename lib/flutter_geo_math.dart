@@ -2,7 +2,7 @@ library flutter_map_math;
 
 import 'dart:math';
 
-import 'lat_lng.dart';
+import 'package:latlong2/latlong.dart';
 
 /// Map related calculations class
 class FlutterMapMath {

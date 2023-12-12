@@ -1,5 +1,4 @@
 import 'package:flutter_map_math/flutter_geo_math.dart';
-import 'package:flutter_map_math/lat_lng.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// TESTS
