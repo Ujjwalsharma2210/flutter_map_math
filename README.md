@@ -145,6 +145,27 @@ List<Map<String, double>> rectangleVertices = [
   print('The area of the rectangle is $rectangleArea square degrees.');
 ```
 
+### Finding Extremal Distance Points
+
+You can use this function to find the pair of points with either the maximum or minimum distance between them.  
+The function takes two arguments: a list of LatLng objects representing points on the map, and a DistanceType enum specifying whether to find the maximum or minimum distance.
+
+```dart
+List<LatLng> points = [
+    LatLng(37.4219999, -122.0840575),
+    LatLng(37.4220011, -122.0866519),
+    LatLng(37.4200000, -122.0800000),
+    // Add more points as needed
+];
+
+List<LatLng> extremalPoints = findExtremalDistancePoints(
+    points,
+    DistanceType.maximum,
+);
+
+print('Points with the maximum distance: $extremalPoints');
+```
+
 ## TODOS
 
 - Mapcoding: Applications may need to convert an address or place name into a latitude and longitude, or vice versa. This can be useful for finding the location of a place or for searching for nearby points of interest.<br>

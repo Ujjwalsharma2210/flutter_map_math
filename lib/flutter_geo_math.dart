@@ -4,6 +4,8 @@ import 'dart:math';
 
 import 'package:latlong2/latlong.dart';
 
+enum DistanceType { minimum, maximum }
+
 /// Map related calculations class
 class FlutterMapMath {
   /// converts kilometers to desired(meters, miles, yards) units
@@ -200,6 +202,58 @@ class FlutterMapMath {
     }
 
     return area.abs();
+  }
+
+  /// Finds the pair of points with extremal distance based on the provided criteria.
+  ///
+  /// This function iterates through all pairs of points in the given list and calculates
+  /// the distance between them. Depending on the `distanceType`, it either finds the pair
+  /// of points with the maximum or minimum distance.
+  ///
+  /// Parameters:
+  ///   - points: List of LatLng objects representing points on the map.
+  ///   - distanceType: Enum specifying whether to find the maximum or minimum distance.
+  ///
+  /// Returns:
+  ///   A list containing the pair of points with the extremal distance.
+  ///   If the input list contains fewer than two points, an empty list is returned.
+  List<LatLng> findExtremalDistancePoints(
+      List<LatLng> points, DistanceType distanceType) {
+    if (points.length < 2) {
+      return [];
+    }
+
+    LatLng point1 = points.first;
+    LatLng point2 = points.last;
+    double maxDistance = double.negativeInfinity;
+    double minDistance = double.infinity;
+
+    for (int i = 0; i < points.length; i++) {
+      for (int j = i + 1; j < points.length; j++) {
+        double distance = distanceBetween(
+          points[i].latitude,
+          points[i].longitude,
+          points[j].latitude,
+          points[j].longitude,
+          "meters",
+        );
+
+        if (distanceType == DistanceType.maximum && distance >= maxDistance) {
+          maxDistance = distance;
+          point1 = points[i];
+          point2 = points[j];
+          continue;
+        }
+
+        if (distanceType == DistanceType.minimum && distance < minDistance) {
+          minDistance = distance;
+          point1 = points[i];
+          point2 = points[j];
+        }
+      }
+    }
+
+    return [point1, point2];
   }
 
   /// Convert degrees to radians
