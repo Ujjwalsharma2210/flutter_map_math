@@ -61,7 +61,7 @@ class FlutterMapMath {
     var y = sin(dLon) * cos(degreesToRadians(lat2));
     var x = cos(degreesToRadians(lat1)) * sin(degreesToRadians(lat2)) -
         sin(degreesToRadians(lat1)) * cos(degreesToRadians(lat2)) * cos(dLon);
-    var angle = degreesToRadians(atan2(y, x));
+    var angle = radiansToDegrees(atan2(y, x));
     return (angle + 360) % 360;
   }
 
