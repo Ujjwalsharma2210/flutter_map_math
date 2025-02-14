@@ -155,19 +155,35 @@ class FlutterMapMath {
   /// and a list of points representing areas on the map, and returns a list of
   /// points that are within a certain distance of the user's location
   List<LatLng> detectProximity(
-      LatLng userLocation, List<LatLng> mapPoints, double distanceThreshold) {
-    List<LatLng> nearbyPoints = [];
+    LatLng userLocation, List<LatLng> mapPoints, double distanceThresholdKm) {
+  const double earthRadiusKm = 6371.0;
+  List<LatLng> nearbyPoints = [];
 
-    for (LatLng point in mapPoints) {
-      double distance = sqrt(pow(userLocation.latitude - point.latitude, 2) +
-          pow(userLocation.longitude - point.longitude, 2));
-      if (distance <= distanceThreshold) {
-        nearbyPoints.add(point);
-      }
-    }
+  double haversineDistance(LatLng point1, LatLng point2) {
+    double lat1 = point1.latitude * pi / 180.0;
+    double lon1 = point1.longitude * pi / 180.0;
+    double lat2 = point2.latitude * pi / 180.0;
+    double lon2 = point2.longitude * pi / 180.0;
 
-    return nearbyPoints;
+    double dLat = lat2 - lat1;
+    double dLon = lon2 - lon1;
+
+    double a = pow(sin(dLat / 2), 2) +
+        cos(lat1) * cos(lat2) * pow(sin(dLon / 2), 2);
+    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+
+    return earthRadiusKm * c;
   }
+
+  for (LatLng point in mapPoints) {
+    double distance = haversineDistance(userLocation, point);
+    if (distance <= distanceThresholdKm) {
+      nearbyPoints.add(point);
+    }
+  }
+
+  return nearbyPoints;
+}
 
   // function that takes a center location and a radius in meters
   // and returns a function that takes a location and returns a boolean
