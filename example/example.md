@@ -59,3 +59,24 @@ Function isInBoundary = createBoundary(center, radiusInMeters);
 LatLng userLocation = LatLng(37.422, -122.083);
 bool isWithinBoundary = isInBoundary(userLocation);
 ```
+
+```dart
+import 'package:flutter_map_math/flutter_cluster.dart';
+
+final points = <LatLng>[
+    LatLng(37.7749, -122.4194), // San Francisco
+    LatLng(37.7750, -122.4195), // Near San Francisco
+    LatLng(37.8044, -122.2711), // Oakland
+    LatLng(37.8045, -122.2712), // Near Oakland
+    LatLng(37.6879, -122.4702), // Daly City
+  ];
+
+  // Define the parameters.
+  // eps: maximum distance (in meters) to be considered neighbors.
+  // minPoints: minimum number of points to form a dense region.
+  const double eps = 100; // 100 meters
+  const int minPoints = 2;
+
+  // DBSCAN example.
+  final clustersDBSCAN = FlutterCluster.dbscan(points, eps, minPoints);
+```

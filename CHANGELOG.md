@@ -109,3 +109,13 @@ Instead of passing latitude and longitude to the **calculateIntersection** funct
 ## 0.1.6
 
 Instead of passing latitude and longitude to the **midpointBetween** function, just pass the two points as **LatLng** objects.
+
+
+## 0.1.7
+Corrected Distance Calculation:
+
+Uses the Haversine formula, which correctly accounts for the Earth's curvature.
+Computes the geodesic distance between two latitude/longitude points in kilometers.
+Proper Threshold Units:
+
+The distanceThresholdKm parameter is now explicitly in kilometers.

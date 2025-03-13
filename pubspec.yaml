@@ -1,6 +1,6 @@
 name: flutter_map_math
 description: Map realated calculations in one place. Like finding distance, mid point, bearing angle of two points.And finding destination point.Also convert degrees to radians and vice-versa
-version: 0.1.6
+version: 0.1.8
 homepage: https://github.com/Ujjwalsharma2210/flutter_map_math
 
 environment:

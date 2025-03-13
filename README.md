@@ -173,6 +173,34 @@ List<LatLng> extremalPoints = findExtremalDistancePoints(
 print('Points with the maximum distance: $extremalPoints');
 ```
 
+### Clustering using DBSCAN
+
+DBSCAN is widely used for geospatial clustering. It groups together points that are closely packed (using a specified distance threshold and minimum points), and it works well with an appropriate geodesic distance measure (like the Haversine formula). Its ability to find arbitrarily shaped clusters without needing to specify the number of clusters is a major advantage.
+
+```dart
+final points = <LatLng>[
+    LatLng(37.7749, -122.4194), // San Francisco
+    LatLng(37.7750, -122.4195), // Near San Francisco
+    LatLng(37.8044, -122.2711), // Oakland
+    LatLng(37.8045, -122.2712), // Near Oakland
+    LatLng(37.6879, -122.4702), // Daly City
+  ];
+
+  // Define the parameters.
+  // eps: maximum distance (in meters) to be considered neighbors.
+  // minPoints: minimum number of points to form a dense region.
+  const double eps = 100; // 100 meters
+  const int minPoints = 2;
+
+  // DBSCAN example.
+  final clustersDBSCAN = FlutterCluster.dbscan(points, eps, minPoints);
+  print('DBSCAN clusters:');
+  for (var i = 0; i < clustersDBSCAN.length; i++) {
+    print('Cluster ${i + 1}: ${clustersDBSCAN[i]}');
+  }
+```
+
+
 ## TODOS
 
 - Mapcoding: Applications may need to convert an address or place name into a latitude and longitude, or vice versa. This can be useful for finding the location of a place or for searching for nearby points of interest.<br>
