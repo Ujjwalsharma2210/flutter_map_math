@@ -119,3 +119,7 @@ Computes the geodesic distance between two latitude/longitude points in kilomete
 Proper Threshold Units:
 
 The distanceThresholdKm parameter is now explicitly in kilometers.
+
+
+## 0.1.8
+Added DBSCAN clustering
