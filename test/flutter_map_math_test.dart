@@ -1,8 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter_map_math/flutter_cluster.dart';
-import 'package:flutter_map_math/flutter_geo_math.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:latlong2/latlong.dart';
 import 'dart:core';
 
@@ -19,7 +17,21 @@ List<LatLng> generateRandomPoints(int count, double centerLat, double centerLng,
   return points;
 }
 
-void testClustering() {
+void testOPTICS() {
+  final points = generateRandomPoints(200, 40.7128, -74.0060, 5.0);
+  OPTICS optics = OPTICS(500, 2); // 500m radius, min 2 points
+  final stopwatch = Stopwatch()..start(); // Start the stopwatch
+  List<LatLng> clusterOrder = optics.optics(points);
+  stopwatch.stop();
+
+  print('Time Taken: ${stopwatch.elapsedMilliseconds} ms');
+  print("Ordered Points:");
+  for (var point in clusterOrder) {
+    print("Lat: ${point.latitude}, Lng: ${point.longitude}");
+  }
+}
+
+void testDBSCAN() {
   // Sample geospatial points.
   // Generate 500 random points around New York City
   final points = generateRandomPoints(500, 40.7128, -74.0060, 5.0);
@@ -39,29 +51,10 @@ void testClustering() {
     print('Cluster ${i + 1}: ${clustersDBSCAN[i].length} points');
   }
 
-  // // OPTICS example (stub implementation).
-  // final clustersOPTICS = FlutterCluster.optics(points, eps, minPoints);
-  // print('\nOPTICS clusters (stub):');
-  // for (var i = 0; i < clustersOPTICS.length; i++) {
-  //   print('Cluster ${i + 1}: ${clustersOPTICS[i]}');
-  // }
-
-  // // HDBSCAN example (stub implementation).
-  // final clustersHDBSCAN = FlutterCluster.hdbscan(points, eps, minPoints);
-  // print('\nHDBSCAN clusters (stub):');
-  // for (var i = 0; i < clustersHDBSCAN.length; i++) {
-  //   print('Cluster ${i + 1}: ${clustersHDBSCAN[i]}');
-  // }
 }
 
 /// TESTS
 void main() {
-  testClustering();
-  // test('find distance between', () {
-  //   final calculator = FlutterMapMath();
-  //   print(calculator.distanceBetween(
-  //       37.4219999, -122.0840575, 37.4220011, -122.0866519, "meters"));
-  //   print(calculator.bearingBetween(
-  //       37.4219999, -122.0840575, 37.4220011, -122.0866519));
-  // });
+  // testDBSCAN();
+  testOPTICS();
 }

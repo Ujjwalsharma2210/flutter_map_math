@@ -123,3 +123,7 @@ The distanceThresholdKm parameter is now explicitly in kilometers.
 
 ## 0.1.8
 Added DBSCAN clustering
+
+
+## 0.1.9
+Added OPTICS clusterings

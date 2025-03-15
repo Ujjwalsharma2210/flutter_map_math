@@ -3,10 +3,11 @@ import 'dart:collection';
 import 'package:latlong2/latlong.dart';
 
 class FlutterCluster {
+
   /// DBSCAN clustering algorithm.
   /// Returns a list of clusters, where each cluster is a list of [LatLng] points.
   static List<List<LatLng>> dbscan(List<LatLng> points, double eps, int minPoints) {
-    final distance = Distance();
+    final distance = const Distance();
     final clusters = <List<LatLng>>[];
     final visited = <LatLng>{};
     final noise = <LatLng>[];
@@ -84,6 +85,74 @@ class FlutterCluster {
       // Add the point to the cluster if not already added.
       if (!cluster.contains(current)) {
         cluster.add(current);
+      }
+    }
+  }
+}
+
+
+
+
+class OPTICS {
+  final double epsilon; // Max distance for neighbors
+  final int minPts; // Min points for a dense region
+  final Distance distance = Distance();
+
+  OPTICS(this.epsilon, this.minPts);
+
+  List<LatLng> optics(List<LatLng> points) {
+    final List<LatLng> orderedList = [];
+    final Set<LatLng> visited = {};
+    final Map<LatLng, double> reachabilityDist = {};
+
+    for (final point in points) {
+      if (visited.contains(point)) continue;
+      visited.add(point);
+
+      final neighbors = _regionQuery(point, points);
+      if (neighbors.length < minPts) {
+        reachabilityDist[point] = double.infinity; // Mark as noise
+      } else {
+        _expandClusterOrder(point, neighbors, orderedList, visited, reachabilityDist, points);
+      }
+    }
+    return orderedList;
+  }
+
+  void _expandClusterOrder(
+      LatLng point,
+      List<LatLng> neighbors,
+      List<LatLng> orderedList,
+      Set<LatLng> visited,
+      Map<LatLng, double> reachabilityDist,
+      List<LatLng> points) {
+    
+    final Queue<LatLng> queue = Queue<LatLng>();
+    orderedList.add(point);
+
+    while (neighbors.isNotEmpty) {
+      final currentPoint = neighbors.removeLast();
+      if (!visited.contains(currentPoint)) {
+        visited.add(currentPoint);
+        final newNeighbors = _regionQuery(currentPoint, points);
+        if (newNeighbors.length >= minPts) {
+          _updateReachability(currentPoint, newNeighbors, reachabilityDist, queue);
+        }
+      }
+      orderedList.add(currentPoint);
+    }
+  }
+
+  List<LatLng> _regionQuery(LatLng point, List<LatLng> points) {
+    return points.where((p) => distance.as(LengthUnit.Meter, point, p) <= epsilon).toList();
+  }
+
+  void _updateReachability(LatLng point, List<LatLng> neighbors, Map<LatLng, double> reachabilityDist, Queue<LatLng> queue) {
+    for (final neighbor in neighbors) {
+      final newReachability = distance.as(LengthUnit.Meter, point, neighbor);
+      if (!reachabilityDist.containsKey(neighbor) || newReachability < reachabilityDist[neighbor]!) {
+        reachabilityDist[neighbor] = newReachability;
+        queue.add(neighbor);
       }
     }
   }

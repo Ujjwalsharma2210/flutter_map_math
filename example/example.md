@@ -80,3 +80,26 @@ final points = <LatLng>[
   // DBSCAN example.
   final clustersDBSCAN = FlutterCluster.dbscan(points, eps, minPoints);
 ```
+
+
+
+```dart
+import 'package:flutter_map_math/flutter_cluster.dart';
+
+List<LatLng> mapPoints = [
+    LatLng(1.0, 1.0),
+    LatLng(2.0, 2.0),
+    LatLng(2.1, 2.2),
+    LatLng(4.0, 4.0),
+    LatLng(6.0, 6.0),
+    LatLng(8.0, 8.0),
+  ];
+
+  OPTICS optics = OPTICS(500, 2); // 500m radius, min 2 points
+  List<LatLng> clusterOrder = optics.optics(mapPoints);
+
+  print("Ordered Points:");
+  for (var point in clusterOrder) {
+    print("Lat: ${point.latitude}, Lng: ${point.longitude}");
+  }
+```

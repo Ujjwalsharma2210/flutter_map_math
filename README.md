@@ -186,18 +186,41 @@ final points = <LatLng>[
     LatLng(37.6879, -122.4702), // Daly City
   ];
 
-  // Define the parameters.
-  // eps: maximum distance (in meters) to be considered neighbors.
-  // minPoints: minimum number of points to form a dense region.
-  const double eps = 100; // 100 meters
-  const int minPoints = 2;
+// Define the parameters.
+// eps: maximum distance (in meters) to be considered neighbors.
+// minPoints: minimum number of points to form a dense region.
+const double eps = 100; // 100 meters
+const int minPoints = 2;
 
-  // DBSCAN example.
-  final clustersDBSCAN = FlutterCluster.dbscan(points, eps, minPoints);
-  print('DBSCAN clusters:');
-  for (var i = 0; i < clustersDBSCAN.length; i++) {
-    print('Cluster ${i + 1}: ${clustersDBSCAN[i]}');
-  }
+// DBSCAN example.
+final clustersDBSCAN = FlutterCluster.dbscan(points, eps, minPoints);
+print('DBSCAN clusters:');
+for (var i = 0; i < clustersDBSCAN.length; i++) {
+  print('Cluster ${i + 1}: ${clustersDBSCAN[i]}');
+}
+```
+
+### Clustering using OPTICS
+
+OPTICS is a density-based clustering algorithm that creates an ordered list of points based on their reachability distance. Unlike DBSCAN, it does not produce strict clusters but instead preserves the hierarchical structure of data points. This makes it useful for finding nested clusters and adjusting density thresholds dynamically.
+
+```dart
+List<LatLng> mapPoints = [
+    LatLng(1.0, 1.0),
+    LatLng(2.0, 2.0),
+    LatLng(2.1, 2.2),
+    LatLng(4.0, 4.0),
+    LatLng(6.0, 6.0),
+    LatLng(8.0, 8.0),
+  ];
+
+OPTICS optics = OPTICS(500, 2); // 500m radius, min 2 points
+List<LatLng> clusterOrder = optics.optics(mapPoints);
+
+print("Ordered Points:");
+for (var point in clusterOrder) {
+  print("Lat: ${point.latitude}, Lng: ${point.longitude}");
+}
 ```
 
 
