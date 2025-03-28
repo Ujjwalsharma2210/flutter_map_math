@@ -223,6 +223,9 @@ for (var point in clusterOrder) {
 }
 ```
 
+### Clustering using OPTICS
+K-Means is an unsupervised clustering algorithm that partitions a dataset into K distinct clusters based on similarity. It is widely used in machine learning, geospatial data clustering, and image segmentation.
+
 
 ## TODOS
 
@@ -235,8 +238,6 @@ for (var point in clusterOrder) {
 - Elevation calculation: Applications may need to calculate the elevation of a point on a map, either as an absolute height above sea level or as a relative height above nearby terrain.<br>
 
 - Heatmap generation: Applications may need to generate a heatmap of points or events on a map, which can be useful for visualizing patterns or clusters of activity.<br>
-
-- Clustering: Applications may need to group nearby points on a map into clusters, which can be useful for reducing visual clutter or for identifying areas of high activity.<br>
 
 - Tile generation: Applications may need to generate map tiles for use in custom map layers or overlays, which can be useful for adding custom data or visualizations to a map.<br>
 

@@ -103,3 +103,28 @@ List<LatLng> mapPoints = [
     print("Lat: ${point.latitude}, Lng: ${point.longitude}");
   }
 ```
+
+
+```dart
+import 'package:flutter_map_math/flutter_cluster.dart';
+
+List<LatLng> points = [
+    LatLng(37.7749, -122.4194), // San Francisco
+    LatLng(37.8044, -122.2711), // Oakland
+    LatLng(37.6879, -122.4702), // Daly City
+    LatLng(34.0522, -118.2437), // Los Angeles
+    LatLng(36.1699, -115.1398), // Las Vegas
+    LatLng(40.7128, -74.0060),  // New York City
+    LatLng(42.3601, -71.0589),  // Boston
+    LatLng(41.8781, -87.6298),  // Chicago
+    LatLng(29.7604, -95.3698),  // Houston
+    LatLng(25.7617, -80.1918),  // Miami
+  ];
+
+  // Instantiate the KMeans clustering algorithm with k = 3 clusters,
+  // a maximum of 100 iterations, and a convergence tolerance of 1 meter.
+  KMeans kmeans = KMeans(k: 3, maxIterations: 100, tolerance: 1.0);
+
+  // Perform clustering.
+  List<List<LatLng>> clusters = kmeans.cluster(points);
+```

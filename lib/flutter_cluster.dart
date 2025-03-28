@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:math';
 
 import 'package:latlong2/latlong.dart';
 
@@ -155,5 +156,107 @@ class OPTICS {
         queue.add(neighbor);
       }
     }
+  }
+}
+
+
+class KMeans {
+  final int k;
+  final int maxIterations;
+  final double tolerance; // convergence threshold in meters
+  final Distance distance = Distance();
+
+  KMeans({
+    required this.k,
+    this.maxIterations = 100,
+    this.tolerance = 1e-4,
+  });
+
+  /// Converts a LatLng point to 3D Cartesian coordinates on a unit sphere.
+  List<double> _toCartesian(LatLng point) {
+    double latRad = point.latitude * pi / 180;
+    double lngRad = point.longitude * pi / 180;
+    double x = cos(latRad) * cos(lngRad);
+    double y = cos(latRad) * sin(lngRad);
+    double z = sin(latRad);
+    return [x, y, z];
+  }
+
+  /// Converts Cartesian coordinates back to a LatLng.
+  LatLng _toLatLng(double x, double y, double z) {
+    double hyp = sqrt(x * x + y * y);
+    double latRad = atan2(z, hyp);
+    double lngRad = atan2(y, x);
+    return LatLng(latRad * 180 / pi, lngRad * 180 / pi);
+  }
+
+  /// Computes the centroid of a list of LatLng points using spherical averaging.
+  LatLng _computeCentroid(List<LatLng> points) {
+    double sumX = 0, sumY = 0, sumZ = 0;
+    for (var p in points) {
+      List<double> cart = _toCartesian(p);
+      sumX += cart[0];
+      sumY += cart[1];
+      sumZ += cart[2];
+    }
+    int n = points.length;
+    double avgX = sumX / n;
+    double avgY = sumY / n;
+    double avgZ = sumZ / n;
+    return _toLatLng(avgX, avgY, avgZ);
+  }
+
+  /// Clusters [points] into k clusters.
+  /// Returns a list of clusters, where each cluster is a list of LatLng points.
+  List<List<LatLng>> cluster(List<LatLng> points) {
+    if (points.isEmpty || k <= 0) return [];
+
+    // Randomly initialize centroids from the points.
+    List<LatLng> centroids = List.from(points)..shuffle();
+    centroids = centroids.take(k).toList();
+
+    List<List<LatLng>> clusters = List.generate(k, (_) => []);
+
+    for (int iter = 0; iter < maxIterations; iter++) {
+      // Clear clusters for current iteration.
+      clusters = List.generate(k, (_) => []);
+
+      // Assignment step: assign each point to the nearest centroid.
+      for (var point in points) {
+        int bestIndex = 0;
+        double minDist = distance.as(LengthUnit.Meter, point, centroids[0]);
+        for (int i = 1; i < centroids.length; i++) {
+          double d = distance.as(LengthUnit.Meter, point, centroids[i]);
+          if (d < minDist) {
+            minDist = d;
+            bestIndex = i;
+          }
+        }
+        clusters[bestIndex].add(point);
+      }
+
+      // Update step: recalc centroids using spherical averaging.
+      List<LatLng> newCentroids = [];
+      for (var cluster in clusters) {
+        if (cluster.isEmpty) {
+          // If a cluster ends up empty, randomly reinitialize its centroid.
+          newCentroids.add(points[Random().nextInt(points.length)]);
+        } else {
+          newCentroids.add(_computeCentroid(cluster));
+        }
+      }
+
+      // Check for convergence.
+      double maxShift = 0;
+      for (int i = 0; i < k; i++) {
+        double shift = distance.as(LengthUnit.Meter, centroids[i], newCentroids[i]);
+        if (shift > maxShift) maxShift = shift;
+      }
+
+      centroids = newCentroids;
+      if (maxShift < tolerance) break;
+    }
+
+    return clusters;
   }
 }

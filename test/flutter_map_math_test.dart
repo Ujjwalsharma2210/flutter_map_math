@@ -53,8 +53,30 @@ void testDBSCAN() {
 
 }
 
+void testKmeans() {
+  // Example list of LatLng points across a large area.
+  List<LatLng> points = generateRandomPoints(100, 40.7128, -74.0060, 5.0);
+
+  // Instantiate the KMeans clustering algorithm with k = 3 clusters,
+  // a maximum of 100 iterations, and a convergence tolerance of 1 meter.
+  KMeans kmeans = KMeans(k: 3, maxIterations: 100, tolerance: 1.0);
+
+  // Perform clustering.
+  List<List<LatLng>> clusters = kmeans.cluster(points);
+
+  // Print the clusters.
+  for (int i = 0; i < clusters.length; i++) {
+    print('Cluster ${i + 1}:');
+    for (var point in clusters[i]) {
+      print('  (${point.latitude.toStringAsFixed(4)}, ${point.longitude.toStringAsFixed(4)})');
+    }
+    print('---------------------');
+  }
+}
+
 /// TESTS
 void main() {
   // testDBSCAN();
-  testOPTICS();
+  // testOPTICS();
+  testKmeans();
 }

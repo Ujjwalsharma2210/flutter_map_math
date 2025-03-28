@@ -127,3 +127,6 @@ Added DBSCAN clustering
 
 ## 0.1.9
 Added OPTICS clusterings
+
+## 0.2.0
+Added k-means clustering
