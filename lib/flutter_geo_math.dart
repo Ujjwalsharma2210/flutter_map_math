@@ -3,6 +3,9 @@ library flutter_map_math;
 import 'dart:math';
 
 import 'package:latlong2/latlong.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 
 enum DistanceType { minimum, maximum }
 
@@ -270,6 +273,17 @@ class FlutterMapMath {
     }
 
     return [point1, point2];
+  }
+
+  static Future<double?> getElevation(LatLng point) async {
+    final url = Uri.parse("https://api.open-elevation.com/api/v1/lookup?locations=${point.latitude},${point.longitude}");
+
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data["results"][0]["elevation"];
+    } 
+    return null;
   }
 
   /// Convert degrees to radians

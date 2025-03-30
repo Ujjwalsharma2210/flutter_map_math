@@ -4,7 +4,6 @@ import 'package:flutter_map_math/flutter_cluster.dart';
 import 'package:flutter_map_math/flutter_geo_math.dart';
 import 'package:latlong2/latlong.dart';
 import 'dart:core';
-import 'dart:developer';
 
 List<LatLng> generateRandomPoints(int count, double centerLat, double centerLng, double radius) {
   final random = Random();

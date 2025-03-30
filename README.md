@@ -8,7 +8,7 @@ To use this package, add map_calculation as a dependency in your '**pubspec.yaml
 
 ```
     dependencies:
-        flutter_map_math: ^1.0.0
+        flutter_map_math: ^0.2.1
 ```
 
 Then, run '**flutter pub get**' to install the package.
@@ -223,8 +223,56 @@ for (var point in clusterOrder) {
 }
 ```
 
-### Clustering using OPTICS
+### Clustering using K-means
 K-Means is an unsupervised clustering algorithm that partitions a dataset into K distinct clusters based on similarity. It is widely used in machine learning, geospatial data clustering, and image segmentation.
+
+```dart
+List<LatLng> mapPoints = [
+    LatLng(1.0, 1.0),
+    LatLng(2.0, 2.0),
+    LatLng(2.1, 2.2),
+    LatLng(4.0, 4.0),
+    LatLng(6.0, 6.0),
+    LatLng(8.0, 8.0),
+  ];
+
+// Instantiate the KMeans clustering algorithm with k = 3 clusters,
+// a maximum of 100 iterations, and a convergence tolerance of 1 meter.
+KMeans kmeans = KMeans(k: 3, maxIterations: 100, tolerance: 1.0);
+
+// Perform clustering.
+List<List<LatLng>> clusters = kmeans.cluster(points);
+
+// Print the clusters.
+for (int i = 0; i < clusters.length; i++) {
+  print('Cluster ${i + 1}:');
+  for (var point in clusters[i]) {
+    print('  (${point.latitude.toStringAsFixed(4)}, ${point.longitude.toStringAsFixed(4)})');
+  }
+  print('---------------------');
+}
+```
+
+### Get the elevation
+Simple method that returns the elevation of a given location in meters. Returns A Future<double?>.
+Uses https://api.open-elevation.com api.
+
+
+```dart
+import 'package:flutter_map_math/flutter_geo_math.dart';
+import 'package:latlong2/latlong.dart';
+
+void testElevation() async {
+  LatLng location = LatLng(27.9881, 86.9250); // Everest Base Camp
+  double? elevation = await FlutterMapMath.getElevation(location);
+  print("Elevation: $elevation meters");
+}
+
+
+void main() {
+  testElevation();
+}
+```
 
 
 ## TODOS
@@ -234,8 +282,6 @@ K-Means is an unsupervised clustering algorithm that partitions a dataset into K
 - Routing: Applications may need to calculate the best route between two points on a map, taking into account factors such as traffic, road closures, and turn restrictions.<br>
 
 - Area calculation: Applications may need to calculate the area of a shape, such as a polygon or circle. This can be useful for measuring the size of a parcel of land or for calculating the coverage area of a wireless network.<br>
-
-- Elevation calculation: Applications may need to calculate the elevation of a point on a map, either as an absolute height above sea level or as a relative height above nearby terrain.<br>
 
 - Heatmap generation: Applications may need to generate a heatmap of points or events on a map, which can be useful for visualizing patterns or clusters of activity.<br>
 

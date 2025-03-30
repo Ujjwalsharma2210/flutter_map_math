@@ -130,3 +130,6 @@ Added OPTICS clusterings
 
 ## 0.2.0
 Added k-means clustering
+
+## 0.2.1
+Added getElevation in FlutterMapMath
