@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter_map_math/flutter_cluster.dart';
+import 'package:flutter_map_math/flutter_geo_math.dart';
 import 'package:latlong2/latlong.dart';
 import 'dart:core';
+import 'dart:developer';
 
 List<LatLng> generateRandomPoints(int count, double centerLat, double centerLng, double radius) {
   final random = Random();
@@ -74,9 +76,16 @@ void testKmeans() {
   }
 }
 
+void testElevation() async {
+  LatLng location = LatLng(27.9881, 86.9250); // Everest Base Camp
+  double? elevation = await FlutterMapMath.getElevation(location);
+  print("Elevation: $elevation meters");
+}
+
 /// TESTS
 void main() {
   // testDBSCAN();
   // testOPTICS();
-  testKmeans();
+  // testKmeans();
+  testElevation();
 }
