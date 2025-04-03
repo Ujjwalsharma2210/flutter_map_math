@@ -277,15 +277,15 @@ void main() {
 
 ## TODOS
 
-- Mapcoding: Applications may need to convert an address or place name into a latitude and longitude, or vice versa. This can be useful for finding the location of a place or for searching for nearby points of interest.<br>
+- Traveling Salesman Problem (TSP) for Path Optimization: This involves finding the optimal order to visit multiple points, minimizing total distance. It uses the existing distanceBetween function, implementing algorithms like nearest neighbor or 2-opt, purely based on coordinate math.<br>
 
-- Routing: Applications may need to calculate the best route between two points on a map, taking into account factors such as traffic, road closures, and turn restrictions.<br>
+- Buffer Zone Creation Around Lines or Polygons: This extends the createBoundary function, allowing offset areas around lines (e.g., roads) or polygons (e.g., regions), calculated by offsetting coordinates using bearing and distance, without external data.<br>
 
 - Area calculation: Applications may need to calculate the area of a shape, such as a polygon or circle. This can be useful for measuring the size of a parcel of land or for calculating the coverage area of a wireless network.<br>
 
 - Heatmap generation: Applications may need to generate a heatmap of points or events on a map, which can be useful for visualizing patterns or clusters of activity.<br>
 
-- Tile generation: Applications may need to generate map tiles for use in custom map layers or overlays, which can be useful for adding custom data or visualizations to a map.<br>
+- Coordinate Projections (e.g., Mercator, UTM): This adds functionality to convert spherical coordinates (lat/lng) to flat map projections, useful for 2D visualizations.<br>
 
 - Point-of-interest identification: Applications may need to identify nearby points of interest, such as restaurants, gas stations, or landmarks. This can be useful for providing recommendations or directions to users.<br>
 

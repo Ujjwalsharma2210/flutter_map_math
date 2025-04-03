@@ -133,3 +133,6 @@ Added k-means clustering
 
 ## 0.2.1
 Added getElevation in FlutterMapMath
+
+## 0.2.2
+Updated TODO
