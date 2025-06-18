@@ -8,7 +8,7 @@ To use this package, add map_calculation as a dependency in your '**pubspec.yaml
 
 ```
     dependencies:
-        flutter_map_math: ^0.2.1
+        flutter_map_math: ^0.2.3
 ```
 
 Then, run '**flutter pub get**' to install the package.
