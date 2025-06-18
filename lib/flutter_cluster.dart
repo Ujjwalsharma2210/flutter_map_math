@@ -8,7 +8,7 @@ class FlutterCluster {
   /// DBSCAN clustering algorithm.
   /// Returns a list of clusters, where each cluster is a list of [LatLng] points.
   static List<List<LatLng>> dbscan(List<LatLng> points, double eps, int minPoints) {
-    final distance = const Distance();
+    const distance = Distance();
     final clusters = <List<LatLng>>[];
     final visited = <LatLng>{};
     final noise = <LatLng>[];
@@ -97,7 +97,7 @@ class FlutterCluster {
 class OPTICS {
   final double epsilon; // Max distance for neighbors
   final int minPts; // Min points for a dense region
-  final Distance distance = Distance();
+  static const Distance distance = Distance();
 
   OPTICS(this.epsilon, this.minPts);
 
@@ -164,7 +164,7 @@ class KMeans {
   final int k;
   final int maxIterations;
   final double tolerance; // convergence threshold in meters
-  final Distance distance = Distance();
+  static const Distance distance = Distance();
 
   KMeans({
     required this.k,

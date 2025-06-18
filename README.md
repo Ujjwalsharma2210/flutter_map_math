@@ -268,12 +268,32 @@ void testElevation() async {
   print("Elevation: $elevation meters");
 }
 
-
 void main() {
   testElevation();
 }
 ```
 
+### Mercator Projection
+Coordinate Projections (e.g., Mercator, UTM): This adds functionality to convert spherical coordinates (lat/lng) to flat map projections and vice-versa, useful for 2D visualizations.
+
+```dart
+import 'package:flutter_map_math/flutter_geo_math.dart';
+import 'package:latlong2/latlong.dart';
+
+void testWebMercator() async {
+  LatLng point = LatLng(37.7749, -122.4194); // San Francisco
+
+  Point<double> projected = FlutterMapMath.projectMercator(point);
+  print("Mercator X: ${projected.x}, Y: ${projected.y}");
+
+  LatLng backToGeo = FlutterMapMath.unprojectMercator(projected);
+  print("Back to LatLng: ${backToGeo.latitude}, ${backToGeo.longitude}");
+}
+
+void main() {
+  testWebMercator();
+}
+```
 
 ## TODOS
 
@@ -284,8 +304,6 @@ void main() {
 - Area calculation: Applications may need to calculate the area of a shape, such as a polygon or circle. This can be useful for measuring the size of a parcel of land or for calculating the coverage area of a wireless network.<br>
 
 - Heatmap generation: Applications may need to generate a heatmap of points or events on a map, which can be useful for visualizing patterns or clusters of activity.<br>
-
-- Coordinate Projections (e.g., Mercator, UTM): This adds functionality to convert spherical coordinates (lat/lng) to flat map projections, useful for 2D visualizations.<br>
 
 - Point-of-interest identification: Applications may need to identify nearby points of interest, such as restaurants, gas stations, or landmarks. This can be useful for providing recommendations or directions to users.<br>
 

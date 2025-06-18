@@ -25,11 +25,11 @@ void testOPTICS() {
   List<LatLng> clusterOrder = optics.optics(points);
   stopwatch.stop();
 
-  print('Time Taken: ${stopwatch.elapsedMilliseconds} ms');
-  print("Ordered Points:");
-  for (var point in clusterOrder) {
-    print("Lat: ${point.latitude}, Lng: ${point.longitude}");
-  }
+  // print('Time Taken: ${stopwatch.elapsedMilliseconds} ms');
+  // print("Ordered Points:");
+  // for (var point in clusterOrder) {
+  //   print("Lat: ${point.latitude}, Lng: ${point.longitude}");
+  // }
 }
 
 void testDBSCAN() {
@@ -46,11 +46,11 @@ void testDBSCAN() {
   final clustersDBSCAN = FlutterCluster.dbscan(points, eps, minPoints);
   stopwatch.stop();
   // Print clusters
-  print('Total Clusters Found: ${clustersDBSCAN.length}');
-  print('Time Taken: ${stopwatch.elapsedMilliseconds} ms');
-  for (var i = 0; i < clustersDBSCAN.length; i++) {
-    print('Cluster ${i + 1}: ${clustersDBSCAN[i].length} points');
-  }
+  // print('Total Clusters Found: ${clustersDBSCAN.length}');
+  // print('Time Taken: ${stopwatch.elapsedMilliseconds} ms');
+  // for (var i = 0; i < clustersDBSCAN.length; i++) {
+  //   print('Cluster ${i + 1}: ${clustersDBSCAN[i].length} points');
+  // }
 
 }
 
@@ -65,26 +65,66 @@ void testKmeans() {
   // Perform clustering.
   List<List<LatLng>> clusters = kmeans.cluster(points);
 
-  // Print the clusters.
-  for (int i = 0; i < clusters.length; i++) {
-    print('Cluster ${i + 1}:');
-    for (var point in clusters[i]) {
-      print('  (${point.latitude.toStringAsFixed(4)}, ${point.longitude.toStringAsFixed(4)})');
-    }
-    print('---------------------');
-  }
+  // // Print the clusters.
+  // for (int i = 0; i < clusters.length; i++) {
+  //   print('Cluster ${i + 1}:');
+  //   for (var point in clusters[i]) {
+  //     print('  (${point.latitude.toStringAsFixed(4)}, ${point.longitude.toStringAsFixed(4)})');
+  //   }
+  //   print('---------------------');
+  // }
 }
 
 void testElevation() async {
   LatLng location = LatLng(27.9881, 86.9250); // Everest Base Camp
   double? elevation = await FlutterMapMath.getElevation(location);
-  print("Elevation: $elevation meters");
+  // print("Elevation: $elevation meters");
+}
+
+void testWebMercator() async {
+  LatLng point = LatLng(37.7749, -122.4194); // San Francisco
+
+  Point<double> projected = FlutterMapMath.projectMercator(point);
+  // print("Mercator X: ${projected.x}, Y: ${projected.y}");
+
+  LatLng backToGeo = FlutterMapMath.unprojectMercator(projected);
+  // print("Back to LatLng: ${backToGeo.latitude}, ${backToGeo.longitude}");
 }
 
 /// TESTS
 void main() {
-  // testDBSCAN();
-  // testOPTICS();
-  // testKmeans();
-  testElevation();
+  try {
+    testDBSCAN();
+    print("✅ testDBSCAN SUCCESS: $e");
+  } catch (e) {
+    print("❌ testDBSCAN ERROR: $e");
+  }
+
+  try {
+    testOPTICS();
+    print("✅ testOPTICS SUCCESS: $e");
+  } catch (e) {
+    print("❌ testOPTICS ERROR: $e");
+  }
+
+  try {
+    testKmeans();
+    print("✅ testKmeans SUCCESS: $e");
+  } catch (e) {
+    print("❌ testKmeans ERROR: $e");
+  }
+
+  try {
+    testElevation();
+    print("✅ testElevation SUCCESS: $e");
+  } catch (e) {
+    print("❌ testElevation ERROR: $e");
+  }
+
+  try {
+    testWebMercator();
+    print("✅ testWebMercator SUCCESS: $e");
+  } catch (e) {
+    print("❌ testWebMercator ERROR: $e");
+  }
 }

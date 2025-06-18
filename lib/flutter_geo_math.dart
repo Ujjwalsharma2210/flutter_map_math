@@ -11,8 +11,12 @@ enum DistanceType { minimum, maximum }
 
 /// Map related calculations class
 class FlutterMapMath {
+
+  static double degreesToRadians(double deg) => deg * pi / 180.0;
+  static double radiansToDegrees(double rad) => rad * 180.0 / pi;
+
   /// converts kilometers to desired(meters, miles, yards) units
-  double toRequestedUnit(String unit, double distanceInKm) {
+  static double toRequestedUnit(String unit, double distanceInKm) {
     switch (unit) {
       case 'kilometers':
         return distanceInKm;
@@ -29,9 +33,9 @@ class FlutterMapMath {
   }
 
   /// Returns distance between two locations on earth
-  double distanceBetween(
+  static double distanceBetween(
       double lat1, double lon1, double lat2, double lon2, String unit) {
-    const earthRadius = 6371; // in km
+    
     // assuming earth is a perfect sphere(it's not)
 
     // Convert degrees to radians
@@ -59,7 +63,7 @@ class FlutterMapMath {
   /// Bearing angle => A bearing describes a line as heading north or south, and
   /// deflected some number of degrees toward the east or west. A bearing,
   /// therefore, will always have an angle less than 90°.
-  double bearingBetween(double lat1, double lon1, double lat2, double lon2) {
+  static double bearingBetween(double lat1, double lon1, double lat2, double lon2) {
     var dLon = degreesToRadians(lon2 - lon1);
     var y = sin(dLon) * cos(degreesToRadians(lat2));
     var x = cos(degreesToRadians(lat1)) * sin(degreesToRadians(lat2)) -
@@ -70,7 +74,7 @@ class FlutterMapMath {
 
   /// Uses a point, distance and bearing anlge to find the destination point.
   /// Returns LatLng Object
-  LatLng destinationPoint(
+  static LatLng destinationPoint(
       double lat, double lng, double distance, double bearing) {
     double radius = 6371 * 1000; // Earth's radius in meters
     double distRatio = distance / radius;
@@ -94,7 +98,7 @@ class FlutterMapMath {
   /// Returns the mid point of two locations on earth.
   /// Returns a LatLng object(the coordinates of mid point)
 
-  LatLng midpointBetween(LatLng location1, LatLng location2) {
+  static LatLng midpointBetween(LatLng location1, LatLng location2) {
     // double dLat = degreesToRadians(lat2 - lat1);
     double dLng = degreesToRadians(location2.longitude - location1.longitude);
     double lat1Radians = degreesToRadians(location1.latitude);
@@ -115,7 +119,7 @@ class FlutterMapMath {
 
   /// A function to calculate the intersection of two lines on Earth
   /// Returns a LatLng object with the latitude and longitude of the intersection point
-  LatLng calculateIntersection(
+  static LatLng calculateIntersection(
       LatLng location1, double bearing1, LatLng location2, double bearing2) {
     // Convert degrees to radians
     double lat1Rad = degreesToRadians(location1.latitude);
@@ -157,7 +161,7 @@ class FlutterMapMath {
   /// function for proximity detection that takes in the user's current location
   /// and a list of points representing areas on the map, and returns a list of
   /// points that are within a certain distance of the user's location
-  List<LatLng> detectProximity(
+  static List<LatLng> detectProximity(
     LatLng userLocation, List<LatLng> mapPoints, double distanceThresholdKm) {
   const double earthRadiusKm = 6371.0;
   List<LatLng> nearbyPoints = [];
@@ -191,7 +195,7 @@ class FlutterMapMath {
   // function that takes a center location and a radius in meters
   // and returns a function that takes a location and returns a boolean
   // indicating whether the location is within the boundary.
-  Function createBoundary(LatLng center, double radius) {
+  static Function createBoundary(LatLng center, double radius) {
     checkBoundary(LatLng location) {
       double distanceInMeters = distanceBetween(
         center.latitude,
@@ -206,7 +210,7 @@ class FlutterMapMath {
     return checkBoundary;
   }
 
-  double calculateArea(List<Map<String, double?>> vertices) {
+  static double calculateArea(List<Map<String, double?>> vertices) {
     int numPoints = vertices.length;
     double area = 0;
 
@@ -236,7 +240,7 @@ class FlutterMapMath {
   /// Returns:
   ///   A list containing the pair of points with the extremal distance.
   ///   If the input list contains fewer than two points, an empty list is returned.
-  List<LatLng> findExtremalDistancePoints(
+  static List<LatLng> findExtremalDistancePoints(
       List<LatLng> points, DistanceType distanceType) {
     if (points.length < 2) {
       return [];
@@ -286,13 +290,18 @@ class FlutterMapMath {
     return null;
   }
 
-  /// Convert degrees to radians
-  double degreesToRadians(double degrees) {
-    return degrees * pi / 180;
+  /// Converts LatLng to Web Mercator projection (x, y in meters)
+  static Point<double> projectMercator(LatLng latLng) {
+    final x = equatorRadius * degreesToRadians(latLng.longitude);
+    final y = equatorRadius * log(tan(pi / 4 + degreesToRadians(latLng.latitude) / 2));
+    return Point(x, y);
   }
 
-  /// converts radians to degrees
-  double radiansToDegrees(double radians) {
-    return radians * 180 / pi;
+  /// Converts Web Mercator (x, y in meters) back to LatLng
+  static LatLng unprojectMercator(Point<double> point) {
+    final lng = radiansToDegrees(point.x / equatorRadius);
+    final lat = radiansToDegrees(2 * atan(exp(point.y / equatorRadius)) - pi / 2);
+    return LatLng(lat, lng);
   }
+  
 }
