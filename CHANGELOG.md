@@ -79,3 +79,7 @@ Updated TODO
 ## 0.2.3
 Added projectMercator and unprojectMercator
 All methods in FlutterMapMath are now static
+
+## 0.2.4
+Added feature: HeatmapGenerator
+Added new Model: HeatPoint

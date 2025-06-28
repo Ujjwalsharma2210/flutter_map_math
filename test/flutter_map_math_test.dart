@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter_map_math/flutter_cluster.dart';
 import 'package:flutter_map_math/flutter_geo_math.dart';
+import 'package:flutter_map_math/heat_map.dart';
+import 'package:flutter_map_math/utils/models/heat_point.dart';
 import 'package:latlong2/latlong.dart';
 import 'dart:core';
 
@@ -91,6 +93,26 @@ void testWebMercator() async {
   // print("Back to LatLng: ${backToGeo.latitude}, ${backToGeo.longitude}");
 }
 
+void testHeatMap() async {
+    final points = [
+    HeatPoint(28.6139, 77.2090),
+    HeatPoint(28.6140, 77.2091),
+    HeatPoint(28.6150, 77.2100),
+  ];
+
+  final heat = HeatmapGenerator.generateHeatmap(
+    points: points,
+    radius: 300,
+    resolution: 50,
+  );
+
+  // heat.forEach((cell, intensity) {
+  //   print('(${cell.x}, ${cell.y}) → ${intensity.toStringAsFixed(2)}');
+    
+  // });
+
+}
+
 /// TESTS
 void main() {
   try {
@@ -126,5 +148,12 @@ void main() {
     print("✅ testWebMercator SUCCESS: $e");
   } catch (e) {
     print("❌ testWebMercator ERROR: $e");
+  }
+
+  try {
+    testHeatMap();
+    print("✅ testHeatMap SUCCESS: $e");
+  } catch (e) {
+    print("❌ testHeatMap ERROR: $e");
   }
 }

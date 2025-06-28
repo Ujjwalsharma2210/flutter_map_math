@@ -295,6 +295,43 @@ void main() {
 }
 ```
 
+### Heatmap generation
+Applications may need to generate a heatmap of points or events on a map, which can be useful for visualizing patterns or clusters of activity.
+
+```dart
+import 'package:flutter_map_math/heat_map.dart';
+import 'package:flutter_map_math/utils/models/heat_point.dart';
+
+final points = [
+  HeatPoint(28.6139, 77.2090),
+  HeatPoint(28.6140, 77.2091),
+  HeatPoint(28.6150, 77.2100),
+];
+
+final heat = HeatmapGenerator.generateHeatmap(
+  points: points,
+  radius: 300,
+  resolution: 50,
+);
+
+heat.forEach((cell, intensity) {
+  print('(${cell.x}, ${cell.y}) → ${intensity.toStringAsFixed(2)}');
+});
+
+```
+
+OUTPUT:
+```dart
+(-5, 0) → 0.41
+(-4, -3) → 0.46
+(-4, -2) → 0.60
+(-4, -1) → 0.71
+(-4, 0) → 0.75
+(-4, 1) → 0.71
+(-4, 2) → 0.60
+...
+```
+
 ## TODOS
 
 - Traveling Salesman Problem (TSP) for Path Optimization: This involves finding the optimal order to visit multiple points, minimizing total distance. It uses the existing distanceBetween function, implementing algorithms like nearest neighbor or 2-opt, purely based on coordinate math.<br>
@@ -302,8 +339,6 @@ void main() {
 - Buffer Zone Creation Around Lines or Polygons: This extends the createBoundary function, allowing offset areas around lines (e.g., roads) or polygons (e.g., regions), calculated by offsetting coordinates using bearing and distance, without external data.<br>
 
 - Area calculation: Applications may need to calculate the area of a shape, such as a polygon or circle. This can be useful for measuring the size of a parcel of land or for calculating the coverage area of a wireless network.<br>
-
-- Heatmap generation: Applications may need to generate a heatmap of points or events on a map, which can be useful for visualizing patterns or clusters of activity.<br>
 
 - Point-of-interest identification: Applications may need to identify nearby points of interest, such as restaurants, gas stations, or landmarks. This can be useful for providing recommendations or directions to users.<br>
 

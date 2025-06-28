@@ -92,8 +92,6 @@ class FlutterCluster {
 }
 
 
-
-
 class OPTICS {
   final double epsilon; // Max distance for neighbors
   final int minPts; // Min points for a dense region
@@ -260,3 +258,4 @@ class KMeans {
     return clusters;
   }
 }
+
