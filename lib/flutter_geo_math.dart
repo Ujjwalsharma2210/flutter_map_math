@@ -35,7 +35,7 @@ class FlutterMapMath {
   /// Returns distance between two locations on earth
   static double distanceBetween(
       double lat1, double lon1, double lat2, double lon2, String unit) {
-    
+    const double earthRadiusKm = 6371.0;
     // assuming earth is a perfect sphere(it's not)
 
     // Convert degrees to radians
@@ -52,7 +52,7 @@ class FlutterMapMath {
         cos(lat1Rad) * cos(lat2Rad) * pow(sin(dLon / 2), 2);
     final c = 2 * atan2(sqrt(a), sqrt(1 - a));
 
-    final distance = earthRadius * c;
+    final distance = earthRadiusKm * c;
 
     return toRequestedUnit(unit, distance);
 
