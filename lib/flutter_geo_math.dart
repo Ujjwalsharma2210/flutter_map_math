@@ -15,21 +15,21 @@ class FlutterMapMath {
   static double degreesToRadians(double deg) => deg * pi / 180.0;
   static double radiansToDegrees(double rad) => rad * 180.0 / pi;
 
-  /// converts kilometers to desired(meters, miles, yards) units
-  static double toRequestedUnit(String unit, double distanceInKm) {
+  /// converts meters to desired(kilometers, miles, yards) units
+  static double toRequestedUnit(String unit, double distanceInMeters) {
     switch (unit) {
       case 'kilometers':
-        return distanceInKm;
+        return distanceInMeters / 1000;
       case 'meters':
-        return distanceInKm * 1000;
+        return distanceInMeters;
       case 'miles':
-        return (distanceInKm * 1000) / 1609.344;
+        return distanceInMeters / 1609.344;
       case 'yards':
-        return distanceInKm * 1093.61;
+        return distanceInMeters * 1.09361 ;
       case '':
-        return distanceInKm;
+        return distanceInMeters;
     }
-    return distanceInKm;
+    return distanceInMeters;
   }
 
   /// Returns distance between two locations on earth

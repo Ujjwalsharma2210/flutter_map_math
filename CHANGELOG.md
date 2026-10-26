@@ -83,3 +83,8 @@ All methods in FlutterMapMath are now static
 ## 0.2.4
 Added feature: HeatmapGenerator
 Added new Model: HeatPoint
+
+## 0.2.5
+Corrected Distance Calculation:
+
+**distanceBetween** now return correct value no more multiplied by 10^3
